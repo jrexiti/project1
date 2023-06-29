@@ -27,7 +27,7 @@ public class BasePage {
 
 		FileInputStream data = new FileInputStream(
 
-				System.getProperty("user.dir") + "/src/testngParams/config3.properties");
+				System.getProperty("user.dir") + "/src/main/java/resources/config.properties");
 
 		prop.load(data);
 	}
@@ -37,15 +37,18 @@ public class BasePage {
 		Thread.sleep(2000);
 
 		if (prop.getProperty("browser").equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/drivers/chromedriver");
+			System.setProperty("webdriver.chrome.driver",
+					System.getProperty("user.dir") + "/src/main/java/drivers/chromedriver");
 
 			driver = new ChromeDriver();
 		} else if (prop.getProperty("browser").equals("firefox")) {
-			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/drivers/geckodriver");
+			System.setProperty("webdriver.gecko.driver",
+					System.getProperty("user.dir") + "/src/main/java/drivers/geckodriver");
 			driver = new FirefoxDriver();
 
 		} else {
-			System.setProperty("webdriver.msedge.driver", System.getProperty("user.dir") + "/src/drivers/msedgedriver");
+			System.setProperty("webdriver.msedge.driver",
+					System.getProperty("user.dir") + "/src/main/java/drivers/msedgedriver");
 			driver = new EdgeDriver();
 		}
 
@@ -67,7 +70,7 @@ public class BasePage {
 	public void takeScreenShots(WebDriver webdriver) throws IOException {
 		File srcFile = ((TakesScreenshot) webdriver).getScreenshotAs(OutputType.FILE);
 
-		File destFile = new File("/Users/jrexiti/Desktop/Resources/Images/" + timeStamp() + ".png");
+		File destFile = new File(System.getProperty("user.dir") + " /target/screenshots/" + timeStamp() + ".png");
 
 		FileUtils.copyFile(srcFile, destFile);
 	}
@@ -76,6 +79,5 @@ public class BasePage {
 
 		return new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date());
 	}
-
 
 }
