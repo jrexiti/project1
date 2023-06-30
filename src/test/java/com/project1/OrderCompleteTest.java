@@ -2,6 +2,8 @@ package com.project1;
 
 import java.io.IOException;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -32,15 +34,19 @@ public class OrderCompleteTest extends BasePage {
 		driver = null;
 	}
 
-	// creating objects of pages to interact with the locator, again the driver
-	// passed in the constructor is coming from the base page
 	@Test
+	// creating objects of pages to interact with the locator, again the driver
+	// passed in the constructors is coming from the base page
 	public void endToEndTest() {
 		HomePage home = new HomePage(driver);
 		home.getTestStoreLink().click();
 
 		ShopHomePage shopHome = new ShopHomePage(driver);
-		shopHome.getProductEight().click();
+		
+		WebDriverWait wait = new WebDriverWait(driver, 120);
+		wait.until(ExpectedConditions.visibilityOf(shopHome.getProductEight()));
+		
+	
 
 		/// you get the idea.......
 
