@@ -1,16 +1,24 @@
 package com.project1;
 
+import org.testng.annotations.AfterMethod;
+
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import java.io.IOException;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import base.BasePage;
 import pageObjects.HomePage;
 import pageObjects.ShopHomePage;
+
+@Listeners(resources.Listeners.class)
 
 public class OrderCompleteTest extends BasePage {
 
@@ -28,6 +36,7 @@ public class OrderCompleteTest extends BasePage {
 
 	}
 
+	@AfterMethod
 	@AfterTest
 	public void tearDown() {
 		driver.close();
@@ -42,11 +51,15 @@ public class OrderCompleteTest extends BasePage {
 		home.getTestStoreLink().click();
 
 		ShopHomePage shopHome = new ShopHomePage(driver);
-		
+
+		// adding a webdriver Explicit wait
 		WebDriverWait wait = new WebDriverWait(driver, 120);
 		wait.until(ExpectedConditions.visibilityOf(shopHome.getProductEight()));
-		
-	
+
+		// Adding an assertion using assert class from TestNG
+		AssertJUnit.assertEquals(shopHome.getProductEight().getText(), "SomeText");
+
+		Assert.fail();
 
 		/// you get the idea.......
 

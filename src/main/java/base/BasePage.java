@@ -16,6 +16,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+
+
 public class BasePage {
 	public static WebDriver driver;
 
@@ -67,10 +69,10 @@ public class BasePage {
 		return url;
 	}
 
-	public void takeScreenShots(WebDriver webdriver) throws IOException {
-		File srcFile = ((TakesScreenshot) webdriver).getScreenshotAs(OutputType.FILE);
+	public void takeScreenShots(String name) throws IOException {
+		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-		File destFile = new File(System.getProperty("user.dir") + " /target/screenshots/" + timeStamp() + ".png");
+		File destFile = new File(System.getProperty("user.dir") + "/target/screenshots/" + timeStamp() + ".png");
 
 		FileUtils.copyFile(srcFile, destFile);
 	}
